@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+  <h1>COVID-19 Trends and Death Toll</h1>
+  <p>[ last updated: {{last_updated}} ]</p>
+  <h2>World Stats:</h2>
+  <table>
+    <tr><td>Confirmed: </td>  <td>{{ "{:,d}".format(world['confirmed']) }} </td></tr>
+    <tr><td>Deaths: </td>     <td>{{ "{:,d}".format(world['deaths']) }} </td></tr>
+    <tr><td>Recovered: </td>  <td>{{ "{:,d}".format(world['recovered']) }}</td></tr>
+  <table>
+  </br>
+  <input style="width:200px" type="text" value="" onkeyup="myFunc()"/><button onclick="myFunc()">Search</button>
+  <p> </p>
+  <table id="countries">
+    <tr>
+      <!-- <th>S.No.</th> -->
+      <th>Country</th>
+      <th>Confirmed</th>
+      <th>Deaths</th>
+      <th>Recovered</th>
+    </tr>
+    {% for (c, d) in data.items() | sort(attribute="1.confirmed", reverse=True) %}
+    <tr>
+      <!-- <td>{{loop.index}}</td> -->
+      <td class="country">{{c}}</td>
+      <td>{{ "{:,d}".format(d['confirmed']) }}</td>
+      <td>{{ "{:,d}".format(d['deaths']) }}</td>
+      <td>{{ "{:,d}".format(d['recovered']) }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
+</body>
+</html>
