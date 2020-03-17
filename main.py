@@ -8,7 +8,7 @@ class Config:
 
 scheduler = APScheduler()
 
-@scheduler.task('cron', id='data_fetch', minute='*/15')
+@scheduler.task('cron', id='data_fetch', minute='*/5')
 def scheduled_data_fetch():
     get_update()
 
