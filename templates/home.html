@@ -3,7 +3,11 @@
 </head>
 <body>
   <h1>COVID-19 Trends and Death Toll</h1>
-  <p>[ last updated: {{last_updated}} ]</p>
+  <p>
+    <script type="text/javascript">
+        document.write("[ last updated: " + new Date("{{last_updated}}") + " ]")
+    </script>
+  </p>
   <h2>World Stats:</h2>
   <table>
     <tr><td>Confirmed: </td>  <td>{{ "{:,d}".format(world['confirmed']) }} </td></tr>

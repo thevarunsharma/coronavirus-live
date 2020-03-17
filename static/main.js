@@ -26,3 +26,4 @@ function myFunc(){
           tr[i+1].style.display="none"
    }
 }
+

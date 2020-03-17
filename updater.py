@@ -77,4 +77,5 @@ def get_update():
         dump(data, fh)
 
     with open("stats/up-date.txt", "w") as fh:
-        fh.write(str(datetime.datetime.utcnow().strftime("%d %B, %Y at %H:%M:%S UTC")))
+        fh.write(str(datetime.datetime.utcnow().strftime("%d %B, %Y %H:%M:%S UTC")))
+        
