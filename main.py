@@ -12,6 +12,7 @@ scheduler = APScheduler()
 def scheduled_data_fetch():
     get_update()
 
+get_update()
 
 app = Flask(__name__)
 app.config.from_object(Config())
