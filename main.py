@@ -8,7 +8,7 @@ class Config:
 
 scheduler = APScheduler()
 
-@scheduler.task('cron', id='data_fetch', minute='*/5')
+@scheduler.task('cron', id='data_fetch', hour='*')
 def scheduled_data_fetch():
     get_update()
 
@@ -26,6 +26,14 @@ def handle():
         last_updated = fh.read()
     return render_template("home.html", data=data, world=world, last_updated=last_updated)
 
+@app.after_request
+def add_header(response):
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1,firefox=1'
+    response.headers['Cache-Control'] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 scheduler.init_app(app)
 scheduler.start()
