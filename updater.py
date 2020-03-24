@@ -4,10 +4,10 @@ import time
 from threading import Thread
 import datetime
 
-def fetch_req(country, code, URL, header, data):
+def fetch_req(country, URL, header, data):
     while True:
         try:
-            req = requests.get(f"{URL}/api/countries/{code}", headers=header)
+            req = requests.get(f"{URL}/api/countries/{country}", headers=header)
             break
         except requests.ConnectionError:
             pass
@@ -65,8 +65,9 @@ def get_update():
     countries = req.json().get("countries")
     data = {}
     threads = []
-    for country, code in countries.items():
-        threads.append(Thread(target=fetch_req, args=(country, code, URL, header, data)))
+    for d in countries:
+        country = d['name']
+        threads.append(Thread(target=fetch_req, args=(country, URL, header, data)))
         threads[-1].start()
 
     for th in threads:
